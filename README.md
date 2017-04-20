@@ -8,7 +8,7 @@ This is a workshop for the [Cascadia-R conference](https://cascadiarconf.com) me
 
 ### Before We Get Started
 
-Before the workshop, please make sure that R and RStudio are installed. Then install the `tidyverse` package using the following command:
+Before the workshop, please make sure that R and RStudio are installed on your laptop. Then install the `tidyverse` package using the following command:
 
 ```
 install.packages("tidyverse")
