@@ -16,4 +16,7 @@
     - Ex:  http://varianceexplained.org/r/improving-pie-chart/
 + Create a summarized table and plot it
     - group_by(), summarize(), geom_col()
-
++ Chain a bunch of operations (%>%)
++ Error bars on a plot?
++ Group variables together (tidyr::gather())
++ Separate a variable into separate variables: tidyr::separate()
