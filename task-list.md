@@ -20,3 +20,4 @@
 + Error bars on a plot?
 + Group variables together (tidyr::gather())
 + Separate a variable into separate variables: tidyr::separate()
++ Lump together levels into "other": forcats::fct_lump()
