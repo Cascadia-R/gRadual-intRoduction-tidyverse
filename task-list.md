@@ -11,7 +11,7 @@
 + Work with Factors/Categorical Data (forcats)
 + Sort Data (arrange)
 + Reorder Bar Plots with Factors (forcats)
-  - fct_infreq(), fct_reorder()
+  - fct_infreq(), fct_reorder(), fct_rev()
 + Walk through tidying data and then tweaking a plot to improve it
     - Ex:  http://varianceexplained.org/r/improving-pie-chart/
 + Create a summarized table and plot it
