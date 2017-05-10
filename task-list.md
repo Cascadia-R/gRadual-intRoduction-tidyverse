@@ -21,3 +21,5 @@
 + Group variables together (tidyr::gather())
 + Separate a variable into separate variables: tidyr::separate()
 + Lump together levels into "other": forcats::fct_lump()
++ Import different data files with readr and readxl packages?
+    - Not sure if we have time to do this too?
