@@ -1,15 +1,15 @@
-# Potential data sets
+### Potential data sets
 
 - fivethirtyeight
   - bechdel
 - https://github.com/laderast/shinyEDA/blob/master/answers/answers.R  
 
-- Mapping aesthetics
+### Mapping aesthetics
   - Scatterplot
   - Bargraph
   - Boxplot
   
-- Data transformation
+### Data transformation
   - bechdel example from DataCamp with `filter` included
     + Only choose a couple categories with `%in%`
   - `filter`, `mutate`, `select`
@@ -17,9 +17,9 @@
   - `arrange`
   - `count`
   
-- Categorical data
+### Categorical data
   - recode factors
-  
-- tidyr + forcats
+
+### tidyr + forcats
 
   
