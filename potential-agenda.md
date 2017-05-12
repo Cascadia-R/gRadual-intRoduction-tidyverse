@@ -2,6 +2,7 @@
   - 10 minutes of lecture
   - 15 minutes of working
   - last 5 minutes to recap
+  - Answers for each part of each section should be no more than three lines of code
 
 ### Potential data sets
 
