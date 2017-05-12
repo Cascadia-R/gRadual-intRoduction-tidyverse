@@ -1,8 +1,12 @@
 ## Tasks We Do using the Tidyverse
 
++ Error bars on a plot?
++ Produce a bar graph with geom_bar and with geom_col
 + Recode Data (stringr/forcats)
     - fct_recode()/fct_collapse()/fct_relevel()
 + Load Data
+    - Import different data files with readr and readxl packages?
+        * Not sure if we have time to do this too?
 + Transform Strings (stringr)
     + Replace text with other text
         - stringr::str_replace_all(), mutate()
@@ -17,10 +21,7 @@
 + Create a summarized table and plot it
     - group_by(), summarize(), geom_col()
 + Chain a bunch of operations (%>%)
-+ Error bars on a plot?
 + Group variables together (tidyr::gather())
 + Separate a variable into separate variables: tidyr::separate()
 + Lump together levels into "other": forcats::fct_lump()
 + Determine the frequency of each group of a categorical variable:  dplyr::count()
-+ Import different data files with readr and readxl packages?
-    - Not sure if we have time to do this too?
