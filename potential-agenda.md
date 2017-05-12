@@ -9,6 +9,8 @@
   - Bargraph
   - Boxplot
   
-    
+- Data transformation
+  - bechdel example from DataCamp with `filter` included
+    + Only choose a couple categories with `%in%`
   
   
