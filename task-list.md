@@ -1,7 +1,7 @@
 ## Tasks We Do using the Tidyverse
 
 + Error bars on a plot?
-+ Produce a bar graph with geom_bar and with geom_col
++ Produce a bar graph with geom_bar (save geom_col for later)
 + Recode Data (stringr/forcats)
     - fct_recode()/fct_collapse()/fct_relevel()
 + Load Data
