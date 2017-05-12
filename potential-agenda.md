@@ -4,6 +4,15 @@
   - last 5 minutes to recap
   - Answers for each part of each section should be no more than three lines of code
 
+## Section 1
+
+### Part 1
+  - Grammar of Graphics (mapping aesthetics to variables)
+  - Scatterplot example (simple x by a year, y, add color)
+  - Adding a line
+  - Challenge (Take out geom_point, what do you get?)
+  
+
 ### Potential data sets
 
 - fivethirtyeight
