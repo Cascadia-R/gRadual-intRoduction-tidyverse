@@ -1,3 +1,8 @@
+## 4 thirty minute sections
+  - 10 minutes of lecture
+  - 15 minutes of working
+  - last 5 minutes to recap
+
 ### Potential data sets
 
 - fivethirtyeight
