@@ -111,6 +111,8 @@ ggplot(pets, aes(x=animal,fill=shotsCurrent)) + geom_bar()
 
 ## Dodge those bars!
 
+Instead of stacking, we can also dodge the bars.
+
 ```{r}
 ggplot(pets, aes(x=animal,fill=shotsCurrent)) + geom_bar(position="dodge")
 
