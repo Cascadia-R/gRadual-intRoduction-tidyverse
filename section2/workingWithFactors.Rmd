@@ -14,7 +14,7 @@ library(tidyverse)
 
 In this section, we'll learn some skills about manipulating factor (categorical) data.
 
-We'll do this by doing a bar plot and progressively making it more complicated.
+We'll do this by making a bar plot and progressively making it more complex.
 
 ## What are factors?
 
@@ -26,8 +26,9 @@ There are two kinds of factors:
 + `ordered`- used for *ordinal* data ("10-30","31-40","41-60")
 
 ```{r}
+##make our table of pets
 pets <- data.frame(id=c('C1','C2','D1','D4','D8', 'C4', "D5"),
-                names=factor(c("Morris", "Morris", "Fido", "Bowser", "Fido", "Sheba", "Hubert")),
+                names=factor(c("Morris", "Morris", "Fido", "Mr Bowser", "Fido", "Lady Sheba", "Hubert")),
                 weights=c(6,7,15,20,40, 10, 60),
                 animal=factor(c("cat", "cat", "dog", "dog", "dog", "cat", "dog")),
                 ##because it's an ordered category, we have to specify 
@@ -62,6 +63,12 @@ ggplot(pets, aes(x=names)) + geom_bar()
 ## Changing the order of a factor
 
 Sometimes you just don't like the default alphabetical order. We're going to do reverse alphabetical order.
+
+```{r}
+ggplot(pets, aes(x=names)) + geom_bar()
+
+```
+
 
 ```{r}
 ggplot(pets, aes(x=names)) + 
@@ -102,8 +109,19 @@ ggplot(pets, aes(x=animal,fill=shotsCurrent)) + geom_bar()
 
 ```
 
+## Dodge those bars!
+
+```{r}
+ggplot(pets, aes(x=animal,fill=shotsCurrent)) + geom_bar(position="dodge")
+
+```
+
 ## Your Task
 
 Given the `pets` `data.frame`, plot a barchart
 
 ```{}
+
+```
+
+## For the Advanced Students
