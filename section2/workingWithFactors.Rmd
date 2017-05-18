@@ -1,0 +1,83 @@
+---
+title: "Working with Factors"
+author: "Ted Laderas"
+date: "5/18/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+## R Markdown
+
+In this section, we'll learn some skills about manipulating factor (categorical) data.
+
+We'll do this by doing a bar plot
+
+## What are factors?
+
+Factors are how R represents categorical data.
+
+There are two kinds of factors: 
+
++ `factor` - used for *nominal* data ("Ducks","Cats","Dogs")
++ `ordered`- used for *ordinal* data ("10-30","31-40","41-60")
+
+```{r}
+pets <- data.frame(id=c('C1','C2','D1','D4','D8'),
+                names=factor(c("Morris", "Morris", "Fido", "Bowser", "Fido")),
+                weights=c(6,7,10,20,40),
+                animal=factor(c("cat", "cat", "dog", "dog", "dog")),
+                ##because it's an ordered category, we have to specify 
+                ##order as the levels argument
+                ageCategory= ordered(c("0-2", "5-8", "5-8", "3-4", "3-4"), 
+                                       levels=c("0-2", "3-4", "5-8")),
+                shotsCurrent=c("No", "No", NA, "Yes", "Yes"))
+
+pets
+```
+
+## Let's build a bar plot
+
+```{r}
+ggplot(data=pets, aes(x=names,y=weights)) + geom_bar(stat="identity")
+```
+
+## What about counting?
+
+`geom_bar()` default is to count the number with each factor. Note that you don't map to a y-aesthetic here, because the y value are the counts.
+
+Given this dataset, we want to ask how many pets have the same name.
+
+Map another variable to `fill` (try both `weight` and `animal`). Are the results what you expected?
+
+```{r}
+ggplot(pets, aes(x=names)) + geom_bar()
+```
+
+## Changing the order of a factor
+
+Sometimes you just don't like the default alphabetical order. We're going to do reverse alphabetical order.
+
+```{r}
+ggplot(pets, aes(x=names)) + 
+  geom_bar() + 
+  facet_wrap(facets=~shotsCurrent)
+
+```
+
+Sometimes you want a factor to be sorted by another variable. 
+
+## Faceting
+
+Say you have another `factor` variable and you want to stratify the plots based on that. 
+
+You can do that by supplying the name of that variable as a facet.
+
+```{r}
+ggplot(pets, aes(x=names)) + geom_bar() + facet_wrap(facets=~shotsCurrent)
+```
+
+## Stacked Bars
