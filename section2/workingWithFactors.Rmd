@@ -16,7 +16,7 @@ In this section, we'll learn some skills about manipulating factor (categorical)
 
 We'll do this by making a bar plot and progressively making it more complex.
 
-## What are factors?
+## Review about Factors 
 
 Factors are how R represents categorical data.
 
@@ -24,6 +24,8 @@ There are two kinds of factors:
 
 + `factor` - used for *nominal* data ("Ducks","Cats","Dogs")
 + `ordered`- used for *ordinal* data ("10-30","31-40","41-60")
+
+We'll manipulate our barplot and add more information using factors.
 
 ```{r}
 ##make our table of pets
@@ -50,7 +52,7 @@ ggplot(data=pets, aes(x=id,y=weights)) + geom_bar(stat="identity")
 
 ## What about counting?
 
-`geom_bar()` default is to count the number with each factor. Note that you don't map to a y-aesthetic here, because the y value are the counts.
+The `geom_bar()` default is to count the number with each factor. Note that you don't map to a y-aesthetic here, because the y values are the counts.
 
 Given this dataset, we want to ask how many pets have the same name.
 
@@ -69,20 +71,7 @@ ggplot(pets, aes(x=names)) + geom_bar()
 
 ```
 
-
-```{r}
-ggplot(pets, aes(x=names)) + 
-  geom_bar() + 
-  facet_wrap(facets=~shotsCurrent)
-```
-
 Sometimes you want a factor to be sorted by another variable. You can use `fct_reorder`.
-
-## Making an "other" category
-
-Say we're only interested in young animals (`0-2`), and we want to lump the other age categories. 
-
-We can use `fct_other`.
 
 ## Faceting
 
@@ -120,10 +109,19 @@ ggplot(pets, aes(x=animal,fill=shotsCurrent)) + geom_bar(position="dodge")
 
 ## Your Task
 
-Given the `pets` `data.frame`, plot a barchart
+Given the `pets` `data.frame`, plot a stacked barchart showing that 
 
 ```{}
 
 ```
 
 ## For the Advanced Students
+
+Look at `geom_boxplot()`
+
+
+## Making an "other" category
+
+Say we're only interested in young animals (`0-2`), and we want to lump the other age categories. 
+
+We can use `fct_other`.
