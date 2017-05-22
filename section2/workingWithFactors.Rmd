@@ -16,7 +16,7 @@ In this section, we'll learn some skills about manipulating factor (categorical)
 
 We'll do this by making a bar plot and progressively making it more complex.
 
-## Review about Factors 
+## Reviewing Factors 
 
 Factors are how R represents categorical data.
 
