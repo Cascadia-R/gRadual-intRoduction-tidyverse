@@ -1,0 +1,82 @@
+---
+title: "Tidy Data: Why and How"
+author: "Ted Laderas"
+date: "5/24/2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## What is Tidy Data?
+
+- each row corresponds to an observation
+- each variable is a column
+- each type of observation is in a different table
+
+![figure/tidy-1.png]
+
+## Why Tidy Data?
+
+Tidy data enables us to do lots of things!
+
+1) Great ggplots
+2) Summarizing the data
+3) Enable Exploratory Data Analysis
+4) Enable Confirmatory Data Analysis
+
+## Beware of columns masquerading as variables!
+
+These columns are actually categories!
+
+Ask yourself: do these columns go together as a single observation for your analysis?
+
+```{r}
+library(tidyr)
+fertilityData <- read.csv("../data/total_fertility.csv", check.names = FALSE)
+
+head(fertilityData)
+```
+
+
+## Making data tidy: `gather()`
+
+Use `gather()` when you need to make a bunch of columns into one column. 
+
+```{r}
+library(tidyr)
+fertilityData <- read.csv("../data/total_fertility.csv", check.names = FALSE)
+
+#gather() takes three arguments: data, key, and value
+#key is what you want your new categorical column to be named
+#value is for the actual values in the columns
+
+#We don't want the `Total fertility rate` to be included
+
+fertilityDataTidy <- 
+  gather(fertilityData, "Year", "fertilityRate", -`Total fertility rate`) %>% 
+  select(Country = `Total fertility rate`, Year, fertilityRate) %>% 
+  filter(!is.na(fertilityRate))
+
+head(fertilityDataTidy)
+```
+
+## Making one column into many: `spread()`
+
+Sometimes, you will need to go the other direction: take a long format dataset and make it into a more matrix-like format.
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+## `separate()`
+
+
+## Your Task:
+
+Take the fertility data and 
+
+## What's Next?
+
+We've showed you the bare basics of the tidyverse.

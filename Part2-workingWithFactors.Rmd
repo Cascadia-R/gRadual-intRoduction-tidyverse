@@ -1,5 +1,5 @@
 ---
-title: "Working with Factors"
+title: "Part 2 - Working with Factors"
 author: "Ted Laderas"
 date: "5/18/2017"
 output: html_document
@@ -29,25 +29,36 @@ We'll manipulate our barplot and add more information using factors.
 
 ```{r}
 ##make our table of pets
-pets <- data.frame(id=c('C1','C2','D1','D4','D8', 'C4', 'D5', 'C10'),
-                names=factor(c("Morris", "Morris", "Fido", "Mr Bowser", "Fido", "Lady Sheba", "Hubert", "Apples")),
-                weights=c(6,7,15,20,40, 10, 60, 17),
-                animal=factor(c("cat", "cat", "dog", "dog", "dog", "cat", "dog", "cat")),
+pets <- data.frame(id=c('C1','C2','D1','D4','D8', 'C4', 'D5', 'C10', "G4"),
+                names=factor(c("Morris", "Morris", "Fido", "Mr Bowser", "Fido", "Lady Sheba", "Hubert", "Apples", "Nibbles")),
+                weight=c(6,7,15,20,40, 10, 60, 17, 0.5),
+                animal=factor(c("cat", "cat", "dog", "dog", "dog", "cat", "dog", "cat", "gerbil")),
                 ##because it's an ordered category, we have to specify 
                 ##order as the levels argument
-                ageCategory= ordered(c("0-2", "5-8", "5-8", "3-4", "3-4", "5-8", "0-2", "5-8"), 
+                ageCategory= ordered(c("0-2", "5-8", "5-8", "3-4", "3-4", "5-8", "0-2", "5-8", "0-2"), 
                                        levels=c("0-2", "3-4", "5-8")),
-                shotsCurrent=c("No", "Yes", NA, "No", "Yes", "No", "No", "Yes"))
+                shotsCurrent=c("No", "Yes", NA, "No", "Yes", "No", "No", "Yes", NA))
 
 pets
 ```
 
+## `forcats` - a useful tidyverse package for doing stuff with categorical data
+
 ## Let's build a bar plot
 
-Let's plot the weights for each pet.
+Let's plot the weight for each pet.
 
 ```{r}
-ggplot(data=pets, aes(x=id,y=weights)) + geom_bar(stat="identity")
+ggplot(data=pets, aes(x=id,y=weight)) + geom_bar(stat="identity")
+```
+
+## Sort by another variable
+
+Let's sort by weight. We can do this by adding a `fct_reorder()` expression to define a new variable `id2` whose categories are ordered by `weight`.
+
+```{r}
+library(forcats)
+pets %>% mutate(id2=fct_reorder(id, weight))  %>% ggplot(aes(x=id2,y=weight)) + geom_bar(stat="identity")
 ```
 
 ## What about counting?
@@ -76,7 +87,6 @@ Sometimes you want a factor to be sorted by another variable. You can use `fct_r
 ## Faceting
 
 Say you have another `factor` variable and you want to stratify the plots based on that. 
-
 You can do that by supplying the name of that variable as a facet.
 
 ```{r}
@@ -100,7 +110,7 @@ ggplot(pets, aes(x=animal,fill=shotsCurrent)) + geom_bar()
 
 ## Dodge those bars!
 
-Instead of stacking, we can also dodge the bars.
+Instead of stacking, we can also dodge the bars (move the bars so they're beside each other).
 
 ```{r}
 ggplot(pets, aes(x=animal,fill=shotsCurrent)) + geom_bar(position="dodge")
@@ -126,14 +136,14 @@ We can use `fct_other`.
 Boxplots allow us to assess distributions of a continuous variable conditioned on categorical variables.
 
 ```{r}
-ggplot(pets, aes(x=shotsCurrent, y=weights)) + geom_boxplot()
+ggplot(pets, aes(x=shotsCurrent, y=weight)) + geom_boxplot()
 
 ```
 
 ## Violin Plots
 
 ```{r}
-ggplot(pets, aes(x=shotsCurrent, y=weights)) + geom_violin()
+ggplot(pets, aes(x=shotsCurrent, y=weight)) + geom_violin()
 
 ```
 
