@@ -1,5 +1,5 @@
 ---
-title: "Tidy Data"
+title: "Tidy Data: Why and How"
 author: "Ted Laderas"
 date: "5/24/2017"
 output: html_document
@@ -9,7 +9,15 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## `gather()`
+## What is Tidy Data?
+
+
+
+## Not Tidy Data
+
+
+
+## Making data tidy: `gather()`
 
 
 ```{r cars}
