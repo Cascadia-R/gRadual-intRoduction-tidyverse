@@ -54,7 +54,7 @@ ggplot(data=pets, aes(x=id,y=weight)) + geom_bar(stat="identity")
 
 ## Sort by another variable
 
-Let's sort by weight. We can do this by adding a `fct_reorder()` expression to define a new variable `id2` whose categories are ordered by `weight`.
+Let's sort the barplot by weight. We can do this by adding a `fct_reorder()` expression to define a new variable `id2` whose categories are ordered by `weight`.
 
 ```{r}
 library(forcats)
@@ -73,16 +73,6 @@ Map another variable to `fill` (try both `weight` and `animal`). Are the results
 ggplot(pets, aes(x=names)) + geom_bar()
 ```
 
-## Changing the order of a factor
-
-Sometimes you just don't like the default alphabetical order. We're going to do reverse alphabetical order.
-
-```{r}
-ggplot(pets, aes(x=names)) + geom_bar()
-
-```
-
-Sometimes you want a factor to be sorted by another variable. You can use `fct_reorder`.
 
 ## Faceting
 
@@ -124,6 +114,18 @@ Given the `pets` `data.frame`, plot a stacked barchart showing that
 ```{}
 
 ```
+
+## Changing the order of a factor
+
+Sometimes you just don't like the default alphabetical order. We're going to do reverse alphabetical order.
+
+```{r}
+ggplot(pets, aes(x=names)) + geom_bar()
+
+```
+
+Sometimes you want a factor to be sorted by another variable. You can use `fct_reorder`.
+
 
 ## Making an "other" category
 

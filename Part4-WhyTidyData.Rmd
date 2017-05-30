@@ -22,9 +22,10 @@ knitr::opts_chunk$set(echo = TRUE)
 Tidy data enables us to do lots of things!
 
 1) Great ggplots
-2) Summarizing the data
+2) Summarize/slice the data in multiple ways
 3) Enable Exploratory Data Analysis
-4) Enable Confirmatory Data Analysis
+4) Ensure assumptions are met for methods
+5) Enable Confirmatory Data Analysis
 
 ## Beware of columns masquerading as variables!
 
