@@ -30,35 +30,22 @@ We'll manipulate our barplot and add more information using factors.
 ```{r}
 ##make our table of pets
 pets <- data.frame(id=c('C1','C2','D1','D4','D8', 'C4', 'D5', 'C10', "G4", "C11"),
-                name=factor(c("Morris", "Morris", "Fido", "Mr Bowser", "Fido", "Lady Sheba", "Hubert", "Apples", "Nibbles", "Morris")),
+                name=factor(c("Morris", "Morris", "Fido", "Mr Bowser", 
+                              "Fido", "Lady Sheba", "Hubert", "Apples", "Nibbles",
+                              "Morris")),
+                ##weight is in pounds
                 weight=c(6,7,15,20,40, 10, 60, 17, 0.5, 10),
-                animal=factor(c("cat", "cat", "dog", "dog", "dog", "cat", "dog", "cat", "gerbil", "cat")),
+                animal=factor(c("cat", "cat", "dog", "dog", "dog", 
+                                "cat", "dog", "cat", "gerbil", "cat")),
                 ##because it's an ordered category, we have to specify 
                 ##order as the levels argument
-                ageCategory= ordered(c("0-2", "5-8", "5-8", "3-4", "3-4", "5-8", "0-2", "5-8", "0-2","5-8"), 
+                ageCategory= ordered(c("0-2", "5-8", "5-8", "3-4", "3-4", 
+                                       "5-8", "0-2", "5-8", "0-2","5-8"), 
                                        levels=c("0-2", "3-4", "5-8")),
-                shotsCurrent=c("No", "Yes", "No", "No", "Yes", "No", "No", "Yes", NA, "No"))
+                shotsCurrent=c("No", "Yes", "No", "No", "Yes", "No", 
+                               "No", "Yes", NA, "No"))
 
 pets
-```
-
-## Let's build a bar plot
-
-Let's plot the weight for each pet. 
-
-```{r}
-ggplot(data=pets, aes(x=id,y=weight)) + geom_bar(stat="identity")
-```
-
-## Sort by another variable (intermediate)
-
-Let's sort the barplot by weight. We can do this by adding a `fct_reorder()` expression to define a new variable `id2` whose categories are ordered by `weight`.
-
-Based on this visualization, what can we conclude about the weights of each type of animal?
-
-```{r}
-library(forcats)
-pets %>% mutate(id2=fct_reorder(id, weight))  %>% ggplot(aes(x=id2,y=weight)) + geom_bar(stat="identity")
 ```
 
 ## What about counting?
@@ -159,19 +146,69 @@ Boxplots allow us to assess distributions of a continuous variable conditioned o
 
 ```{r}
 ggplot(pets, aes(x=shotsCurrent, y=weight)) + geom_boxplot()
-
 ```
 
 ## Violin Plots
+
+Violin plots are another useful way to visualize the data. Note that we only have one NA value, so we
 
 ```{r}
 ggplot(pets, aes(x=shotsCurrent, y=weight)) + geom_violin()
 
 ```
 
+## Looking at Sepal Length across Species
+
+Our 
+
 ```{r}
 data(iris)
 
 ggplot(iris, aes(x=Species, y=Sepal.Length, fill=Species)) + geom_violin()
 ```
+
+## More on manipulating factors
+
+The following section is optional. Intermediate users may find these helpful.
+
+You'll need to load the `forcats` package to use these.
+
+## Let's build a bar plot
+
+Let's plot the weight for each pet as a bar graph.
+
+```{r}
+ggplot(data=pets, aes(x=id,y=weight)) + geom_bar(stat="identity")
+```
+
+## Sort by another variable (intermediate)
+
+Let's sort the barplot by weight. We can do this by adding a `fct_reorder()` expression to define a new variable `id2` whose categories are ordered by `weight`.
+
+Based on this visualization, what can we conclude about the weights of each type of animal? Which kind of animal weighs the most?
+
+```{r}
+library(forcats)
+pets %>% mutate(id2=fct_reorder(id, weight))%>% ggplot(aes(x=id2,y=weight)) + geom_bar(stat="identity")
+```
+
+## Plot in Reverse Alphabetical Order
+
+Often, you want to plot things in reverse alphametical order. This is useful because heatmaps and such are often plotted from the bottom.
+
+You can use `fct_rev` to do this.
+
+```{r}
+library(forcats)
+pets %>% mutate(id2=fct_rev(id))%>% 
+  ggplot(aes(x=id2,y=weight)) + 
+  geom_bar(stat="identity")
+```
+
+## Sort by frequency
+
+Going back to our `pets` data, sometimes we want to sort our count data by frequency. We can use `fct_infreq()` to do that.
+
+```{r}
+pets %>% mutate(name = fct_infreq(name)) %>% ggplot(aes(x=name)) + geom_bar()
 ```

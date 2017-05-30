@@ -7,6 +7,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
 ```
 
 ## What is Tidy Data?
@@ -33,13 +34,14 @@ These columns are actually categories!
 
 Ask yourself: do these columns go together as a single observation for your analysis?
 
+Also ask yourself: What is the unit of observation?
+
 ```{r}
 library(tidyr)
 fertilityData <- read.csv("data/total_fertility.csv", check.names = FALSE)
 
-head(fertilityData)
+fertilityData[1:10, 1:10]
 ```
-
 
 ## Making data tidy: `gather()`
 
@@ -62,7 +64,7 @@ fertilityDataTidy <-
   #remove na values (there are countries that have no information)
   filter(!is.na(fertilityRate))
 
-head(fertilityDataTidy)
+fertilityDataTidy[1:10,]
 ```
 
 ## Making one column into many: `spread()`
@@ -75,7 +77,7 @@ Let's change things around and make the `Country` column into the variables in t
 fertilityCountryColumns <- fertilityDataTidy %>% 
   spread(Country, fertilityRate) 
 
-head(fertilityCountryColumns)
+fertilityCountryColumns[1:10, 1:10]
 ```
 
 ## `separate()`
