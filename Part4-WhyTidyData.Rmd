@@ -35,7 +35,7 @@ Ask yourself: do these columns go together as a single observation for your anal
 
 ```{r}
 library(tidyr)
-fertilityData <- read.csv("../data/total_fertility.csv", check.names = FALSE)
+fertilityData <- read.csv("data/total_fertility.csv", check.names = FALSE)
 
 head(fertilityData)
 ```
@@ -47,17 +47,19 @@ Use `gather()` when you need to make a bunch of columns into one column.
 
 ```{r}
 library(tidyr)
-fertilityData <- read.csv("../data/total_fertility.csv", check.names = FALSE)
+fertilityData <- read.csv("data/total_fertility.csv", check.names = FALSE)
 
 #gather() takes three arguments: data, key, and value
 #key is what you want your new categorical column to be named
 #value is for the actual values in the columns
 
-#We don't want the `Total fertility rate` to be included
+#We don't want the `Total fertility rate` column to be included as part of the
+#gather() operation, so we use the `-` notation to exclude it.
 
 fertilityDataTidy <- 
   gather(fertilityData, "Year", "fertilityRate", -`Total fertility rate`) %>% 
   select(Country = `Total fertility rate`, Year, fertilityRate) %>% 
+  #remove na values (there are countries that have no information)
   filter(!is.na(fertilityRate))
 
 head(fertilityDataTidy)
@@ -65,14 +67,20 @@ head(fertilityDataTidy)
 
 ## Making one column into many: `spread()`
 
-Sometimes, you will need to go the other direction: take a long format dataset and make it into a more matrix-like format.
+Sometimes, you will need to go the other direction: take a long format dataset and make it into a more matrix-like format. This is necessary for such functions such as `heatmap()`.
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+Let's change things around and make the `Country` column into the variables in the dataset.
+
+```{r}
+fertilityCountryColumns <- fertilityDataTidy %>% 
+  spread(Country, fertilityRate) 
+
+head(fertilityCountryColumns)
 ```
 
 ## `separate()`
 
+If you have a bunch of values that are in a column and are separated by another delimiter (such as `\t`, or ` `), you can use `separate` to make them into separate columns.
 
 ## Your Task:
 

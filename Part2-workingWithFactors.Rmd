@@ -14,7 +14,7 @@ library(tidyverse)
 
 In this section, we'll learn some skills about manipulating factor (categorical) data.
 
-We'll do this by making a bar plot and progressively making it more complex.
+We'll do this by making a bar plot and a box plot and progressively making it more complex.
 
 ## Reviewing Factors 
 
@@ -29,32 +29,32 @@ We'll manipulate our barplot and add more information using factors.
 
 ```{r}
 ##make our table of pets
-pets <- data.frame(id=c('C1','C2','D1','D4','D8', 'C4', 'D5', 'C10', "G4"),
-                names=factor(c("Morris", "Morris", "Fido", "Mr Bowser", "Fido", "Lady Sheba", "Hubert", "Apples", "Nibbles")),
-                weight=c(6,7,15,20,40, 10, 60, 17, 0.5),
-                animal=factor(c("cat", "cat", "dog", "dog", "dog", "cat", "dog", "cat", "gerbil")),
+pets <- data.frame(id=c('C1','C2','D1','D4','D8', 'C4', 'D5', 'C10', "G4", "C11"),
+                name=factor(c("Morris", "Morris", "Fido", "Mr Bowser", "Fido", "Lady Sheba", "Hubert", "Apples", "Nibbles", "Morris")),
+                weight=c(6,7,15,20,40, 10, 60, 17, 0.5, 10),
+                animal=factor(c("cat", "cat", "dog", "dog", "dog", "cat", "dog", "cat", "gerbil", "cat")),
                 ##because it's an ordered category, we have to specify 
                 ##order as the levels argument
-                ageCategory= ordered(c("0-2", "5-8", "5-8", "3-4", "3-4", "5-8", "0-2", "5-8", "0-2"), 
+                ageCategory= ordered(c("0-2", "5-8", "5-8", "3-4", "3-4", "5-8", "0-2", "5-8", "0-2","5-8"), 
                                        levels=c("0-2", "3-4", "5-8")),
-                shotsCurrent=c("No", "Yes", NA, "No", "Yes", "No", "No", "Yes", NA))
+                shotsCurrent=c("No", "Yes", "No", "No", "Yes", "No", "No", "Yes", NA, "No"))
 
 pets
 ```
 
-## `forcats` - a useful tidyverse package for doing stuff with categorical data
-
 ## Let's build a bar plot
 
-Let's plot the weight for each pet.
+Let's plot the weight for each pet. 
 
 ```{r}
 ggplot(data=pets, aes(x=id,y=weight)) + geom_bar(stat="identity")
 ```
 
-## Sort by another variable
+## Sort by another variable (intermediate)
 
 Let's sort the barplot by weight. We can do this by adding a `fct_reorder()` expression to define a new variable `id2` whose categories are ordered by `weight`.
+
+Based on this visualization, what can we conclude about the weights of each type of animal?
 
 ```{r}
 library(forcats)
@@ -63,16 +63,15 @@ pets %>% mutate(id2=fct_reorder(id, weight))  %>% ggplot(aes(x=id2,y=weight)) + 
 
 ## What about counting?
 
-The `geom_bar()` default is to count the number with each factor. Note that you don't map to a y-aesthetic here, because the y values are the counts.
+The `geom_bar()` default is to count the number of values with each factor level. Note that you don't map to a y-aesthetic here, because the y values are the counts.
 
-Given this dataset, we want to ask how many pets have the same name.
+Given this dataset, we want to ask how many pets have the same name. 
 
-Map another variable to `fill` (try both `weight` and `animal`). Are the results what you expected?
+Try mapping another variable to `fill` (try both `weight` and `animal`). Are the results what you expected?
 
 ```{r}
-ggplot(pets, aes(x=names)) + geom_bar()
+ggplot(pets, aes(x=name)) + geom_bar()
 ```
-
 
 ## Faceting
 
@@ -80,13 +79,23 @@ Say you have another `factor` variable and you want to stratify the plots based 
 You can do that by supplying the name of that variable as a facet.
 
 ```{r}
-ggplot(pets, aes(x=names)) + geom_bar() + facet_wrap(facets=~shotsCurrent)
+ggplot(pets, aes(x=name)) + geom_bar() + 
+  ## have to specify facets using notation
+  ## try out facets=~ageCategory!
+  facet_wrap(facets=~shotsCurrent) + 
+  ## we make the x axis x angled for better legibility
+  theme(axis.text.x = element_text(angle=45))
 ```
 
-You might notice that there are blank spots for the categories in each facet. We can restrict factors in each by using `scale="free"` argument in `facet_wrap()`.
+You might notice that there are blank spots for the categories in each facet. We can restrict factors in each by using `scale="free_x"` argument in `facet_wrap()`.
+
+How many animals named "Morris" did not receive shots?
 
 ```{r}
-ggplot(pets, aes(x=names)) + geom_bar() + facet_wrap(facets=~shotsCurrent, scale="free")
+ggplot(pets, aes(x=name)) + geom_bar() + 
+  facet_wrap(facets=~shotsCurrent, scale="free_x") +
+  theme(axis.text.x = element_text(angle=45))
+  
 ```
 
 ## Stacked Bars
@@ -94,8 +103,17 @@ ggplot(pets, aes(x=names)) + geom_bar() + facet_wrap(facets=~shotsCurrent, scale
 Let's see how many of each animal got shots. We can do this by mapping shots to `fill`.
 
 ```{r}
-ggplot(pets, aes(x=animal,fill=shotsCurrent)) + geom_bar()
+#we map color (the outline of the plot) to black to make it look prettier
+ggplot(pets, aes(x=animal,fill=shotsCurrent)) + geom_bar(color="black")
+```
 
+## Proportional Barchart
+
+We may only be interested in the relative proportions between the different categories. Visualizing this is useful for various 2 x 2 tests on proportions.
+
+```{r}
+ggplot(pets, aes(x=animal,fill=shotsCurrent)) + 
+  geom_bar(position = "fill", color = "black")
 ```
 
 ## Dodge those bars!
@@ -103,16 +121,21 @@ ggplot(pets, aes(x=animal,fill=shotsCurrent)) + geom_bar()
 Instead of stacking, we can also dodge the bars (move the bars so they're beside each other).
 
 ```{r}
-ggplot(pets, aes(x=animal,fill=shotsCurrent)) + geom_bar(position="dodge")
+ggplot(pets, aes(x=animal,fill=shotsCurrent)) + 
+  geom_bar(position="dodge", color="black")
 
 ```
 
 ## Your Task
 
-Given the `pets` `data.frame`, plot a stacked barchart showing that 
+Given the `pets``data.frame`, plot a stacked proportional barchart showing that shows the age category counts by animal type. Is the proportion of animals receiving shots the same across each age category?
 
-```{}
+Intermediate: facet this plot by `shotsCurrent`. 
 
+```{r}
+pets %>% ggplot(aes(x=ageCategory, fill=animal)) + 
+  geom_bar(position="fill", color="black") #+ 
+  #facet_wrap(facets=~shotsCurrent, scales="free_x")
 ```
 
 ## Changing the order of a factor
@@ -120,18 +143,15 @@ Given the `pets` `data.frame`, plot a stacked barchart showing that
 Sometimes you just don't like the default alphabetical order. We're going to do reverse alphabetical order.
 
 ```{r}
-ggplot(pets, aes(x=names)) + geom_bar()
+ggplot(pets, aes(x=name)) + geom_bar()
 
 ```
 
 Sometimes you want a factor to be sorted by another variable. You can use `fct_reorder`.
 
+## Making an "other" category (intermediate)
 
-## Making an "other" category
-
-Say we're only interested in young animals (`0-2`), and we want to lump the other age categories. 
-
-We can use `fct_other`.
+Say we're only interested in comparing young animals (`0-2`) to the older animals. We can use `fct_other()`.
 
 ## Boxplots
 
