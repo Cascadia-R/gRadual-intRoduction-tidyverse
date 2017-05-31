@@ -67,27 +67,40 @@ fertilityDataTidy <-
 fertilityDataTidy[1:10,]
 ```
 
+## Now answer this question using the tidy data
+
+How would we find the average fertility within a year? How about from 1860 on?
+
+```{r}
+
+```
+
 ## Making one column into many: `spread()`
 
 Sometimes, you will need to go the other direction: take a long format dataset and make it into a more matrix-like format. This is necessary for such functions such as `heatmap()`.
 
-Let's change things around and make the `Country` column into the variables in the dataset.
+Let's change things around and make the `Country` column into the variables (columns) in the dataset. 
 
 ```{r}
 fertilityCountryColumns <- fertilityDataTidy %>% 
+  #spread takes a key (Country) and value (fertilityRate) argument
   spread(Country, fertilityRate) 
 
 fertilityCountryColumns[1:10, 1:10]
 ```
 
-## `separate()`
+## Your Task
 
-If you have a bunch of values that are in a column and are separated by another delimiter (such as `\t`, or ` `), you can use `separate` to make them into separate columns.
+Load the `dem_score.csv` dataset in the `data/` folder. Tidy it up. Which countries had the highest democracy score in 2007?
 
-## Your Task:
+```{r}
+#enter your answer here
 
-Take the fertility data and 
+demScore <- read.csv("data/dem_score.csv")
+
+
+```
 
 ## What's Next?
 
-We've showed you the bare basics of the tidyverse.
+We've showed you the bare basics of the tidyverse. There's a ton more!
