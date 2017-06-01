@@ -20,7 +20,7 @@ library(tidyverse)
 - each variable is a column
 - each type of observation is in a different table
 
-![figure/tidy-1.png]
+![](figure/tidy-1.png)
 
 ## Why Tidy Data?
 
@@ -112,8 +112,12 @@ We've showed you the bare basics of the tidyverse. There's a ton more!
 
 Where to go next?
 
+- <http://tidyverse.org>
+    - `lubridate` for dealing with dates
+    - `haven`/`readr`/`readxl` for importing data
 - Modern Dive (by Chester and Albert Kim): http://moderndive.com
 - R for Data Science: http://r4ds.had.co.nz
+- [Variety of courses on DataCamp](https://www.datacamp.com/) 
 
 ## Give us Feedback!
 
