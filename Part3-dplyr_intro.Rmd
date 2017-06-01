@@ -1,0 +1,215 @@
+---
+title: "Part 1 - Intro to the gRammar of gRaphics with `ggplot2`"
+author: "Chester Ismay"
+output: 
+  html_document:
+    code_download: true
+    code_folding: hide
+    df_print: paged
+---
+
+```{r include=FALSE}
+library(tidyverse)
+knitr::opts_chunk$set(message=FALSE)
+filter <- dplyr::filter
+knitr::opts_chunk$set(warning=FALSE, message=FALSE, fig.width=9.5, fig.height=4.5, comment=NA, rows.print=16, out.width = "\\textwidth")
+theme_set(theme_gray(base_size = 20))
+```
+
+In this section, we'll discuss Data Wrangling/Transformation via the `dplyr` package.  We'll explore ways to choose subsets of data, aggregate data to create summaries, make new variables, and sort your data frames.  It is recommended you also explore the RStudio Cheatsheet on [Data Transformation](https://github.com/rstudio/cheatsheets/raw/master/source/pdfs/data-transformation-cheatsheet.pdf) as we discuss this content.
+
+### Back to `gapminder`
+
+
+Here is a look at the `gapminder` data frame in the `gapminder` package.
+
+```{r}
+library(gapminder)
+rmarkdown::paged_table(gapminder)
+# Has been set as the default way to print data frames
+# via df_print: paged in the YAML at the top
+```
+
+Say we wanted mean life expectancy across all years for Asia
+
+```{r}
+# Base R
+asia <- gapminder[gapminder$continent == "Asia", ]
+mean(asia$lifeExp)
+```
+
+```{r}
+library(dplyr)
+gapminder %>% 
+  filter(continent == "Asia") %>%
+  summarize(mean_exp = mean(lifeExp))
+```
+
+## The pipe `%>%`
+
+`r knitr::include_graphics("figure/pipe.png")` &emsp; &emsp;`r knitr::include_graphics("figure/MagrittePipe.jpg")`
+
+- A way to chain together commands
+- It is *essentially* the `dplyr` equivalent to the `+` in `ggplot2`
+
+
+# The Five Main Verbs (5MV) of data wrangling
+
+### `filter()` <br> `summarize()` <br> `group_by()` <br> `mutate()` <br> `arrange()`
+
+---
+
+## `filter()`
+
+- Select a subset of the rows of a data frame. 
+- The arguments are the "filters" that you'd like to apply.
+
+```{r}
+library(gapminder); library(dplyr)
+gap_2007 <- gapminder %>% filter(year == 2007)
+gap_2007
+```
+
+- Use `==` to compare a variable to a value
+
+## Logical operators
+
+- Use `|` to check for any in multiple filters being true:
+
+```{r}
+gapminder %>% 
+  filter(year == 2002 | continent == "Europe")
+```
+
+- Use `&` or `,` to check for all of multiple filters being true:
+
+```{r}
+gapminder %>% 
+  filter(year == 2002, continent == "Europe")
+```
+
+- Use `%in%` to check for any being true (shortcut to using `|` repeatedly with `==`)
+
+```{r}
+gapminder %>% 
+  filter(country %in% c("Argentina", "Belgium", "Mexico"),
+         year %in% c(1987, 1992))
+```
+
+## `summarize()`
+
+- Any numerical summary that you want to apply to a column of a data frame is specified within `summarize()`.
+
+```{r}
+max_exp_1997 <- gapminder %>% 
+  filter(year == 1997) %>% 
+  summarize(max_exp = max(lifeExp))
+max_exp_1997
+```
+
+### Combining `summarize()` with `group_by()`
+
+When you'd like to determine a numerical summary for all
+levels of a different categorical variable
+
+```{r}
+max_exp_1997_by_cont <- gapminder %>% 
+  filter(year == 1997) %>% 
+  group_by(continent) %>%
+  summarize(max_exp = max(lifeExp))
+max_exp_1997_by_cont
+```
+
+### Without the `%>%`
+
+It's hard to appreciate the `%>%` without seeing what the code would look like without it:
+
+```{r}
+max_exp_1997_by_cont <- 
+  summarize(
+    group_by(
+      filter(
+        gapminder, 
+          year == 1997), 
+      continent),
+    max_exp = max(lifeExp))
+max_exp_1997_by_cont
+```
+
+## `mutate()`
+
+- Allows you to 
+    1. create a new variable based on other variables OR
+    2. change the contents of an existing variable
+
+
+1. create a new variable based on other variables
+
+```{r}
+gap_w_gdp <- gapminder %>% mutate(gdp = pop * gdpPercap)
+gap_w_gdp
+```
+
+## `mutate()`
+
+3. change the contents of an existing variable
+
+```{r}
+gap_weird <- gapminder %>% mutate(pop = pop + 1000)
+gap_weird
+```
+
+## `arrange()`
+
+- Reorders the rows in a data frame based on the values of one or more variables
+
+```{r}
+gapminder %>%
+  arrange(year, country)
+```
+
+- Can also put into descending order
+
+```{r desc}
+gapminder %>%
+  filter(year > 2000) %>%
+  arrange(desc(lifeExp))
+```
+
+## Other useful `dplyr` verbs
+
+- `select`
+- `top_n`
+- `sample_n`
+- `slice`
+- `glimpse`
+- `rename`
+
+## Your Task
+
+Determine which African country had the highest GDP per capita in 1982 using the `gapminder` data in the `gapminder` package.
+
+```{r}
+#Space for your answer here.
+```
+
+**Challenge**
+
+For both of these problems below, use the `bechdel` data frame in the `fivethirtyeight` package:
+
+- Use the `count` function in the `dplyr` package to determine how many movies
+in 2013 fell into each of the different categories for `clean_test`
+- Determine the percentage of movies that received the value of `"ok"` across all years
+
+
+---
+
+
+## Your Task
+
+Determine the top five movies in terms of domestic return on investment for 2013 scaled data using the `bechdel` data frame in the `fivethirtyeight` package.
+
+
+```{r}
+#Space for your answer here.
+```
