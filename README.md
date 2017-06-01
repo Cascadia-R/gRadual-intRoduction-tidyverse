@@ -20,3 +20,7 @@ Before the workshop, please make sure that R and RStudio are installed on your l
 ```
 install.packages(c("tidyverse", "gapminder", "fivethirtyeight", "rmarkdown"))
 ```
+
+### To get started
+
+Open the `gRadual-intRoduction-tidyverse.Rproj` file in RStudio and open [Part1-ggplot2_intro.Rmd](Part1-ggplot2_intro.Rmd).
