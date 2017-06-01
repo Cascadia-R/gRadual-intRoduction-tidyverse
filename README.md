@@ -21,6 +21,14 @@ Before the workshop, please make sure that R and RStudio are installed on your l
 install.packages(c("tidyverse", "gapminder", "fivethirtyeight", "rmarkdown"))
 ```
 
+### During the Workshop
+
+We'll be using the cascadiarconf slack (http://cascadiarconf.slack.com) Go to the #gradual-tidyverse channel. Feel free to ask questions and answer them if you the answer.
+
+Since there are so many of us, please get to know your neighbor and work together. If you have major issues, we'll try to get to you.
+
+Use your Post-Its to signal whether your are doing ok (Green) or you need help (Red) and one of us will help you.
+
 ### To get started
 
 Open the `gRadual-intRoduction-tidyverse.Rproj` file in RStudio and open [Part1-ggplot2_intro.Rmd](Part1-ggplot2_intro.Rmd).
