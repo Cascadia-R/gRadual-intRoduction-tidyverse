@@ -6,10 +6,8 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE)
 ```
-
-## R Markdown
 
 In this section, we'll learn some skills about manipulating factor (categorical) data.
 
@@ -121,7 +119,7 @@ ggplot(pets, aes(x=animal,fill=shotsCurrent)) +
 
 ## Your Task
 
-Given the `pets``data.frame`, plot a stacked proportional barchart showing that shows the age category counts by animal type. Is the proportion of animals receiving shots the same across each age category?
+Given the `pets` `data.frame`, plot a stacked proportional barchart showing that shows the age category counts by animal type. Is the proportion of animals receiving shots the same across each age category?
 
 Intermediate Folks: facet this plot by `shotsCurrent`. 
 
@@ -134,7 +132,7 @@ Intermediate Folks: facet this plot by `shotsCurrent`.
 
 Boxplots allow us to assess distributions of a continuous variable conditioned on categorical variables.
 
-What does the 
+What does this tell us? 
 
 ```{r}
 ggplot(pets, aes(x=shotsCurrent, y=weight)) + geom_boxplot()
