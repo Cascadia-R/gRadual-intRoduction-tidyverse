@@ -2,7 +2,11 @@
 title: "Part 2 - Working with Factors"
 author: "Ted Laderas"
 date: "5/18/2017"
-output: html_document
+output: 
+  html_document:
+    code_download: true
+    code_folding: hide
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
@@ -24,31 +28,17 @@ There are two kinds of factors:
 
 We'll manipulate our barplot and add more information using factors.
 
+Here's the simple dataset we'll use to investigate how to work with factors in `ggplot`.
+
+For the `factor` and `ordered` variables, find the categories for each using `levels()`.
+
 ```{r}
 library(tidyverse)
-
-##make our table of pets
-pets <- data.frame(id=c('C1','C2','D1','D4','D8', 'C4', 'D5', 
-                        'C10', "G4", "C11", "D9", "C6"),
-                name=factor(c("Morris", "Morris", "Fido", "Mr Bowser", 
-                              "Fido", "Lady Sheba", "Hubert", "Apples", "Nibbles",
-                              "Morris", "Winky", "Fido")),
-                ##weight is in pounds
-                weight=c(6,7,15,20,40, 10, 60, 17, 0.5, 10, 11, 6),
-                animal=factor(c("cat", "cat", "dog", "dog", "dog", 
-                                "cat", "dog", "cat", "gerbil", "cat", "dog", "cat")),
-                ##because it's an ordered category, we have to specify 
-                ##order as the levels argument
-                ageCategory= ordered(c("0-2", "5-8", "5-8", "3-4", "3-4", 
-                                       "5-8", "0-2", "5-8", "0-2","5-8", "3-4", "5-8"), 
-                                       levels=c("0-2", "3-4", "5-8")),
-                shotsCurrent=c("No", "Yes", "No", "No", "Yes", "No", 
-                               "No", "Yes", NA, "No", "No", "Yes"))
-
+load("data/pets.rda")
 pets
 ```
 
-## A basic bar plot
+## A Basic Barplot using `geom_bar()`
 
 The `geom_bar()` default is to count the number of values with each factor level. Note that you don't map to a y-aesthetic here, because the y values are the counts.
 
@@ -57,16 +47,16 @@ Given this dataset, we might want to ask how many pets have the same name. What 
 Try mapping another variable to `fill` (try both `weight` and `animal`). Are the results what you expected?
 
 ```{r}
-ggplot(pets, aes(x=name)) + geom_bar()
+ggplot(data=pets, mapping=aes(x=name)) + geom_bar()
 ```
 
 ## Faceting
 
 Say you have another `factor` variable and you want to stratify the plots based on that. 
-You can do that by supplying the name of that variable as a facet.
+You can do that by supplying the name of that variable as a facet. Here, we facet our barplot by `shotsCurrent`.
 
 ```{r}
-ggplot(pets, aes(x=name)) + geom_bar() + 
+ggplot(data=pets, mapping=aes(x=name)) + geom_bar() + 
   ## have to specify facets using notation
   ## try out facets=~ageCategory!
   facet_wrap(facets=~shotsCurrent) + 
@@ -74,7 +64,7 @@ ggplot(pets, aes(x=name)) + geom_bar() +
   theme(axis.text.x = element_text(angle=45))
 ```
 
-You might notice that there are blank spots for the categories in each facet. We can restrict factors in each by using `scale="free_x"` argument in `facet_wrap()`.
+You might notice that there are blank spots for the categories in each facet. We can restrict the factors in each by using `scale="free_x"` argument in `facet_wrap()`.
 
 How many animals named "Morris" did not receive shots?
 
@@ -84,7 +74,6 @@ What happens when you replace the `scale` argument with "free_y"?
 ggplot(pets, aes(x=name)) + geom_bar() + 
   facet_wrap(facets=~shotsCurrent, scale="free_x") +
   theme(axis.text.x = element_text(angle=45))
-  
 ```
 
 ## Stacked Bars
@@ -93,7 +82,8 @@ Let's see how many of each animal got shots. We can do this by mapping `shotsCur
 
 ```{r}
 #we map color (the outline of the plot) to black to make it look prettier
-ggplot(pets, aes(x=animal,fill=shotsCurrent)) + geom_bar(color="black")
+ggplot(pets, aes(x=animal, fill=shotsCurrent)) + 
+  geom_bar(color="black")
 ```
 
 ## Proportional Barchart
@@ -114,19 +104,19 @@ Instead of stacking, we can also dodge the bars (move the bars so they're beside
 ```{r}
 ggplot(pets, aes(x=animal,fill=shotsCurrent)) + 
   geom_bar(position="dodge", color="black")
-
 ```
 
-## Your Task
+## Your Task: Bar Charts
 
 Given the `pets` `data.frame`, plot a stacked proportional barchart showing that shows the age category counts by animal type. Is the proportion of animals receiving shots the same across each age category?
+
+Hints: think about what to map to `x`, and what to map to `fill`.
 
 Intermediate Folks: facet this plot by `shotsCurrent`. 
 
 ```{r}
 #Space for your answer here.
 ```
-
 
 ## Boxplots
 
@@ -140,17 +130,17 @@ ggplot(pets, aes(x=shotsCurrent, y=weight)) + geom_boxplot()
 
 ## Violin Plots
 
-Violin plots are another useful way to visualize the data. 
+Violin plots are another useful way to visualize the data. They provide a more nuanced look at the data. They're a density plot that's mirrored around the y-axis.
 
 ```{r}
-ggplot(pets, aes(x=ageCategory, y=weight, fill=ageCategory)) + geom_boxplot()
+ggplot(pets, aes(x=ageCategory, y=weight, fill=ageCategory)) + geom_violin()
 ```
 
 ## Your task: How heavy are our pets?
 
 Visualize `weight` by `animal` type as both a boxplot and a violin plot. What do you conclude? Which kind of animal weighs more on average than the other?
 
-Intermediate users: How would we plot both boxplots and a violin plot on the same graph?
+Intermediate challenge: How would we plot both boxplots and a violin plot on the same graph?
 
 ```{r}
 ##Space for your answer here
@@ -158,74 +148,7 @@ Intermediate users: How would we plot both boxplots and a violin plot on the sam
 
 ## What you learned in this section
 
-- visualizing categorical data
-- simple, stacked, stacked proportional, and dodged boxplots 
-- faceting a graph
-- boxplots and violin plots
-
-## (Optional) More on manipulating factors
-
-The following section is optional. Intermediate users may find these helpful.
-
-You'll need to load the `forcats` package to use these.
-
-```{r}
-library(forcats)
-```
-
-## Let's build a bar plot
-
-To start out, let's plot the weight for each pet as a bar graph.
-
-```{r}
-ggplot(data=pets, aes(x=id,y=weight)) + geom_bar(stat="identity")
-```
-
-## Sort by another variable (intermediate)
-
-Let's sort the barplot by weight. We can do this by adding a `fct_reorder()` expression to define a new variable `id2` whose categories are ordered by `weight`.
-
-Based on this visualization, what can we conclude about the weights of each type of animal? Which kind of animal weighs the most?
-
-```{r}
-pets %>% mutate(id2=fct_reorder(id, weight)) %>% 
-  ggplot(aes(x=id2,y=weight)) + 
-  geom_bar(stat="identity") 
-```
-
-## Plot in Reverse Alphabetical Order
-
-Often, you want to plot things in reverse alphametical order. This is useful because heatmaps and such are often plotted from the bottom.
-
-You can use `fct_rev` to do this.
-
-```{r}
-library(forcats)
-pets %>% mutate(id2=fct_rev(id))%>% 
-  ggplot(aes(x=id2,y=weight)) + 
-  geom_bar(stat="identity")
-```
-
-## Sort by frequency
-
-Going back to our `pets` data, sometimes we want to sort our count data by frequency. We can use `fct_infreq()` to do that.
-
-```{r}
-pets %>% mutate(name = fct_infreq(name)) %>% ggplot(aes(x=name)) + geom_bar()
-```
-
-## Recode levels of a factor
-
-```{r}
-
-```
-
-## Group levels of a factor together
-
-```{r}
-
-```
-
-## Making an "other" category (intermediate)
-
-Say we're only interested in comparing young animals (`0-2`) to the older animals. We can use `fct_other()`.
+- Visualizing factor data
+- Simple, stacked, stacked proportional, and dodged barplots 
+- Faceting a graph
+- Boxplots and violin plots
