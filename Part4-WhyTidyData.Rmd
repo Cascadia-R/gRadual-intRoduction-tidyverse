@@ -106,6 +106,42 @@ demScore <- read.csv("data/dem_score.csv")
 
 ```
 
+## Challenge - if that was too easy...
+
+Take a look at the `who` dataset (it's built into `tidyverse`)
+
+```{r}
+data(who)
+
+who
+```
+
+## Make it look like this:
+
+```{r}
+load("data/who_tidy.rda")
+
+who_tidy
+```
+
+## Some Hints on the Challenge
+
+Look at the documentation for `separate()`. You'll have to apply `separate` twice, with different parameters.
+
+What does each column mean? Here's some info from the data dictionary:
+
+1) The first three letters of entries in the key column correspond to new or old cases of TB.
+2) The next two letters (after the _) correspond to TB type:
+    + rel for relapse, 
+    + ep for extrapulmonary TB
+    + sn for smear negative, 
+    + sp for smear positive
+3) The next letter after the second _ corresponds to the sex of the TB patient.
+4) The remaining numbers correspond to age group:
+    + 014 for 0 to 14 years
+    + 65 for 65 or older
+    + etc.
+
 ## What's Next?
 
 We've showed you the bare basics of the tidyverse. There's a ton more!
@@ -114,6 +150,7 @@ Where to go next?
 
 - <http://tidyverse.org>
     - `lubridate` for dealing with dates
+    - `stringr` for manipulating strings
     - `haven`/`readr`/`readxl` for importing data
 - Modern Dive (by Chester and Albert Kim): http://moderndive.com
 - R for Data Science: http://r4ds.had.co.nz
@@ -125,4 +162,4 @@ Let us know what you thought of the workshop!
 
 Was it too easy? Too hard?
 
-What else would you like to see? Add Feedback here:
+What else would you like to see? [Add Feedback here](https://github.com/Cascadia-R/gRadual-intRoduction-tidyverse/issues/1)
