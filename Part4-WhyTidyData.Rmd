@@ -126,20 +126,20 @@ who_tidy
 
 ## Some Hints on the Challenge
 
-Look at the documentation for `separate()`. You'll have to apply `separate` twice, with different parameters.
+Look at the documentation for `separate()`. You will first have to gather a bunch of the columns into a single column. Then you will have to apply `separate()` twice, with different parameters.
 
 What does each column mean? Here's some info from the data dictionary:
 
 1) The first three letters of entries in the key column correspond to new or old cases of TB.
 2) The next two letters (after the _) correspond to TB type:
-    + rel for relapse, 
-    + ep for extrapulmonary TB
-    + sn for smear negative, 
-    + sp for smear positive
+    + `rel` for relapse, 
+    + `ep` for extrapulmonary TB
+    + `sn` for smear negative, 
+    + `sp` for smear positive
 3) The next letter after the second _ corresponds to the sex of the TB patient.
 4) The remaining numbers correspond to age group:
-    + 014 for 0 to 14 years
-    + 65 for 65 or older
+    + `014` for 0 to 14 years
+    + `65` for 65 or older
     + etc.
 
 ## What's Next?
