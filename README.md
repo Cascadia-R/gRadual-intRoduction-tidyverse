@@ -26,7 +26,7 @@ install.packages(c("tidyverse", "gapminder", "fivethirtyeight", "rmarkdown"))
 
 ### During the Workshop
 
-We'll be using the cascadiarconf slack (http://cascadiarconf.slack.com) Go to the #gradual-tidyverse channel. Feel free to ask questions and answer them if you the answer.
+We'll be using the cascadiarconf slack (http://cascadiarconf.slack.com) Go to the #gradual-tidyverse channel. Feel free to ask questions there! Please answer them if you know the answer.
 
 Since there are so many of us, please get to know your neighbor and work together. If you have major issues, we'll try to get to you.
 
