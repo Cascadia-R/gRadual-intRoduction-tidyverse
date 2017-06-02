@@ -34,4 +34,6 @@ Use your Post-Its to signal whether your are doing ok (Green) or you need help (
 
 ### To get started
 
+Download this repo by clicking the green "Clone or Download". Select "Download as Zip" and open the zip file.
+
 Open the `gRadual-intRoduction-tidyverse.Rproj` file in RStudio and open [Part1-ggplot2_intro.Rmd](Part1-ggplot2_intro.Rmd).
