@@ -32,7 +32,7 @@ Go to the #gradual-tidyverse channel. Feel free to ask questions there! Please a
 
 Since there are so many of us, please get to know your neighbor and work together. If you have major issues, we'll try to get to you.
 
-Use your Post-Its to signal whether your are doing ok (Green) or you need help (Red) and one of us will help you.
+Use your Post-Its to signal whether you are doing ok (Green) or you need help (Red) and one of us will help you.
 
 ### To get started
 
