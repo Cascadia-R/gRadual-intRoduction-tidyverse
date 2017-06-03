@@ -1,6 +1,6 @@
 # A gRadual-intRoduction to the tidyverse
 
-## Chester Ismay and Ted Laderas
+## [Chester Ismay](https://ismayc.github.io) and [Ted Laderas](https://laderast.github.io)
 
 ### Audience: Beginner to Intermediate R Users
 

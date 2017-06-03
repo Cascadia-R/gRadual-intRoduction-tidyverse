@@ -156,6 +156,11 @@ Where to go next?
 - R for Data Science: http://r4ds.had.co.nz
 - [Variety of courses on DataCamp](https://www.datacamp.com/) 
 
+## Keep in Touch!
+
+Ted: @tladeras https://laderast.github.io
+Chester: @old_man_chester https://ismayc.github.io
+
 ## Give us Feedback!
 
 Let us know what you thought of the workshop! 
