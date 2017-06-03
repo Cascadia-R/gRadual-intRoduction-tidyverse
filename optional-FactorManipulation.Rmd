@@ -23,7 +23,7 @@ You'll need to load the `forcats` package to use these. It's included with the `
 library(tidyverse)
 library(forcats)
 #load the pets data again
-load("data/pets.rda")
+load("../data/pets.rda")
 ```
 
 ## Let's build a bar plot of weights
@@ -98,7 +98,3 @@ pets %>% mutate(alphabet = fct_collapse(name,
 ```
 
 ## `forcats` does way more!
-
-## Intermediate Challenge
-
-Recode the pets

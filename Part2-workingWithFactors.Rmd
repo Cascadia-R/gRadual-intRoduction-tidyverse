@@ -1,6 +1,6 @@
 ---
 title: "Part 2 - Working with Factors"
-author: "Ted Laderas"
+author: "Ted Laderas (Solutions)"
 date: "5/18/2017"
 output: 
   html_document:
@@ -90,7 +90,7 @@ ggplot(pets, aes(x=animal, fill=shotsCurrent)) +
 
 We may only be interested in the relative proportions between the different categories. Visualizing this is useful for various 2 x 2 tests on proportions.
 
-What percent of dogs did not recieve shots?
+What percent of dogs did not receive shots?
 
 ```{r}
 ggplot(pets, aes(x=animal,fill=shotsCurrent)) + 
@@ -108,7 +108,7 @@ ggplot(pets, aes(x=animal,fill=shotsCurrent)) +
 
 ## Your Task: Bar Charts
 
-Given the `pets` `data.frame`, plot a stacked proportional barchart showing that shows the age category counts by animal type. Is the proportion of animals receiving shots the same across each age category?
+Given the `pets` `data.frame`, plot a stacked proportional barchart that shows the age category counts by animal type. Is the proportion of animals receiving shots the same across each age category?
 
 Hints: think about what to map to `x`, and what to map to `fill`.
 
@@ -116,7 +116,17 @@ Intermediate Folks: facet this plot by `shotsCurrent`.
 
 ```{r}
 #Space for your answer here.
+ggplot(pets, aes(x=animal,fill=ageCategory)) + 
+  geom_bar(position="fill", color="black")
 ```
+
+```{r}
+#Space for your answer here.
+ggplot(pets, aes(x=animal,fill=ageCategory)) + 
+  geom_bar(position="fill", color="black") +
+  facet_wrap(~ shotsCurrent)
+```
+
 
 ## Boxplots
 
@@ -144,7 +154,36 @@ Intermediate challenge: How would we plot both boxplots and a violin plot on the
 
 ```{r}
 ##Space for your answer here
+ggplot(pets, aes(x = animal, y = weight)) +
+  geom_boxplot()
 ```
+
+```{r}
+##Space for your answer here
+ggplot(pets, aes(x = animal, y = weight)) +
+  geom_violin()
+```
+
+```{r}
+##Space for your answer here
+ggplot(pets, aes(x = animal, y = weight)) +
+  geom_boxplot()
+```
+
+```{r}
+##Space for your answer here
+ggplot(pets, aes(x = animal, y = weight)) +
+  geom_boxplot() +
+  geom_violin()
+```
+
+```{r}
+##Space for your answer here
+ggplot(pets, aes(x = animal, y = weight)) +
+  geom_violin(draw_quantiles = c(0.25, 0.5, 0.75))
+```
+
+Dogs tend to weight the most.
 
 ## What you learned in this section
 
