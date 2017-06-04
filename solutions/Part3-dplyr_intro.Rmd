@@ -1,5 +1,5 @@
 ---
-title: "Part 1 - Intro to the gRammar of gRaphics with `ggplot2`"
+title: "Part 3 - Intro to `dplyr`"
 author: "Chester Ismay"
 output: 
   html_document:
@@ -47,7 +47,7 @@ gapminder %>%
 
 ## The pipe `%>%`
 
-`r knitr::include_graphics("figure/pipe.png")` &emsp; &emsp;`r knitr::include_graphics("figure/MagrittePipe.jpg")`
+`r knitr::include_graphics("../figure/pipe.png")` &emsp; &emsp;`r knitr::include_graphics("../figure/MagrittePipe.jpg")`
 
 - A way to chain together commands
 - It is *essentially* the `dplyr` equivalent to the `+` in `ggplot2`
