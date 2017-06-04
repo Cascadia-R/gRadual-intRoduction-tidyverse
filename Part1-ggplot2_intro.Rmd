@@ -116,4 +116,7 @@ library(gapminder)
 gap1992 <- gapminder %>% filter(year == 1992)
 
 #Space for your answer here.
+ggplot(gap1992, aes(x = log(gpdPerCap), y = lifeExp)) +
+  geom_point()
+
 ```

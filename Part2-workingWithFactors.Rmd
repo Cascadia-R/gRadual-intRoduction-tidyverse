@@ -116,15 +116,12 @@ Intermediate Folks: facet this plot by `shotsCurrent`.
 
 ```{r}
 #Space for your answer here.
-ggplot(pets, aes(x=animal,fill=ageCategory)) + 
-  geom_bar(position="fill", color="black")
+
 ```
 
 ```{r}
 #Space for your answer here.
-ggplot(pets, aes(x=animal,fill=ageCategory)) + 
-  geom_bar(position="fill", color="black") +
-  facet_wrap(~ shotsCurrent)
+
 ```
 
 
@@ -154,36 +151,8 @@ Intermediate challenge: How would we plot both boxplots and a violin plot on the
 
 ```{r}
 ##Space for your answer here
-ggplot(pets, aes(x = animal, y = weight)) +
-  geom_boxplot()
-```
 
-```{r}
-##Space for your answer here
-ggplot(pets, aes(x = animal, y = weight)) +
-  geom_violin()
 ```
-
-```{r}
-##Space for your answer here
-ggplot(pets, aes(x = animal, y = weight)) +
-  geom_boxplot()
-```
-
-```{r}
-##Space for your answer here
-ggplot(pets, aes(x = animal, y = weight)) +
-  geom_boxplot() +
-  geom_violin()
-```
-
-```{r}
-##Space for your answer here
-ggplot(pets, aes(x = animal, y = weight)) +
-  geom_violin(draw_quantiles = c(0.25, 0.5, 0.75))
-```
-
-Dogs tend to weight the most.
 
 ## What you learned in this section
 
