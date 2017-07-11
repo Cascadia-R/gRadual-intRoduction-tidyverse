@@ -1,4 +1,4 @@
-# A gRadual-intRoduction to the tidyverse
+# A gRadual intRoduction to the tidyverse
 
 ## [Chester Ismay](https://ismayc.github.io) and [Ted Laderas](https://laderast.github.io)
 
