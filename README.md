@@ -18,7 +18,9 @@ Part 4 - The Whys and Hows of Tidy Data using `tidyr` [Part4-WhyTidyData.Rmd](Pa
 
 ### Before We Get Started
 
-Before the workshop, please make sure that R and RStudio are installed on your laptop. (You should have version 3.3 or higher for R and version 1.0 or higher of RStudio.)  Then install the `tidyverse`, `gapminder`, `fivethirtyeight` and `rmarkdown` packages from CRAN using the following command:
+If you are completely new to R and RStudio, please check out this [free guide](http://moderndive.com/2-getting-started.html) on [ModernDive.com](http://moderndive.com) to Getting Started first.
+
+After you are up to speed with this, make sure that R and RStudio are installed on your laptop. (You should have version 3.3 or higher for R and version 1.0 or higher of RStudio.)  Then install the `tidyverse`, `gapminder`, `fivethirtyeight` and `rmarkdown` packages from CRAN using the following command:
 
 ```
 install.packages(c("tidyverse", "gapminder", "fivethirtyeight", "rmarkdown"))
