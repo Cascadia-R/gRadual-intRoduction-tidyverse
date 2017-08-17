@@ -4,7 +4,7 @@
 
 ### Audience: Beginner to Intermediate R Users
 
-This is a workshop for the [Cascadia-R conference](https://cascadiarconf.com) meant to be a gentle introduction to the tidyverse for data wrangling and visualization.  If you are completely new to R and RStudio, please check out this [free guide](http://moderndive.com/2-getting-started.html) on [ModernDive.com](http://moderndive.com) to Getting Started first.
+This is a workshop for the [Cascadia-R conference](https://cascadiarconf.com) meant to be a gentle introduction to the tidyverse for data wrangling and visualization.  If you are completely new to R and RStudio, please check out this [free guide](http://moderndive.com/2-getting-started.html) on [ModernDive.com](http://moderndive.com) on getting started first.
 
 ### What You'll Learn Today
 
